@@ -26,7 +26,7 @@ class LearningAgent(Agent):
         ###########
         # Set any additional class parameters as needed
         self.trialNumber = 0
-        self.a = 0.96
+        self.a = 0.98
 
 
     def reset(self, destination=None, testing=False):
@@ -70,7 +70,7 @@ class LearningAgent(Agent):
         # When learning, check if the state is in the Q-table
         #   If it is not, create a dictionary in the Q-table for the current 'state'
         #   For each action, set the Q-value for the state-action pair to 0
-        state = (waypoint, inputs['light'], inputs['left'], inputs['right'])
+        state = (waypoint, inputs['light'], inputs['left'], inputs['oncoming'])
 
         return state
 
@@ -141,7 +141,8 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
-        self.Q[state][action] = (reward*self.alpha)+(self.Q[state][action]*(1-self.alpha))
+        if self.learning:
+            self.Q[state][action] = (reward*self.alpha)+(self.Q[state][action]*(1-self.alpha))
         return
 
 
@@ -193,7 +194,7 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env,update_delay=0.01,log_metrics=True, optimized=False,display=True)
+    sim = Simulator(env,update_delay=0.01,log_metrics=True, optimized=True,display=True)
     
     ##############
     # Run the simulator
