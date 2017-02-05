@@ -11864,8 +11864,10 @@ div#notebook {
 <p><strong>Answer:</strong>
 The cab doesn't move during the simulation.</p>
 <p>The rewards are given considering the action that the cab takes, when the cab doesn't move but a movement will cause an accident or it will brake a traffic rule then it will get a positive reward, otherwise it gets a negative reward.</p>
-<p>when the traffic light is green and the waypoint is right or forward you get a negative reward if you don't move.
-when the traffic light red and the waypoint right you may get a negative reward if the car on the left dones't go forward</p>
+<p>when the traffic light is green and the waypoint is right or forward you get a negative reward if you don't move
+when the traffic light is green and there isn't traffic you get a positive reward</p>
+<p>when the traffic light red and the waypoint right you get a negative reward if the car on the left doesn't go forward, but if the car in your left goes forward you get a positive reward.</p>
+<p>when the traffic light is red and the waypoint is left or forward, you get a positive reward.</p>
 
 </div>
 </div>
@@ -18169,19 +18171,31 @@ The agent needed about 200 trails to start the the testing since the function is
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>the optimal policy is always None in case that the action mark by the way point causes a traffic accident or traffic Violation or going on the direction mark by the way point.</p>
-<p>this policy is the optimal: None is the optimal since is red and the waypoint is left
-but we haven't selected the None action for this state.
-('left', 'red', 'right', 'right')
+<ul>
+<li>this policy is the sub-optimal: None is the optimal since is red and the waypoint is left
+but we haven't selected the None action for this state.</li>
+</ul>
+<p>('left', 'red', 'right', 'right')
  -- forward : 0.00
  -- None : 0.00
  -- right : 0.38
- -- left : 0.00
-this policy is not optimal: None is the optimal but it feels that None was never choose as an action in this state. 
-('forward', 'red', 'right', 'right')
+ -- left : 0.00</p>
+<ul>
+<li>this policy is sub-optimal: None is the optimal but it feels that None was never choose as an action in this state. </li>
+</ul>
+<p>('forward', 'red', 'right', 'right')
  -- forward : -5.20
  -- None : 0.00
  -- right : 0.08
  -- left : -20.39</p>
+<ul>
+<li>this an optimal policy : since the cab follows the waypoint and it doesn't cause an accident.</li>
+</ul>
+<p>('right', 'green', 'left', 'right')
+ -- forward : 0.00
+ -- None : 0.00
+ -- right : 1.47
+ -- left : 0.00</p>
 
 </div>
 </div>
